@@ -1,5 +1,5 @@
 // Copyright 2021 AreSZerA. All rights reserved.
-// This file provides default error page handler, see also in route.go.
+// This file provides default error page handler.
 
 package crimson
 
@@ -92,8 +92,8 @@ const errPageTpl = `<!DOCTYPE html>
 
 </html>`
 
-// handleErrPage sets response status code and error page.
-func handleErrPage(w http.ResponseWriter, status int, info interface{}) {
+// ErrPageHandler sets response status code and error page.
+func ErrPageHandler(w http.ResponseWriter, status int, info interface{}) {
 	w.WriteHeader(status)
 	w.Header().Set("Content-Type", "text/html")
 	sInfo, ok := statusInfo[status]

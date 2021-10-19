@@ -63,10 +63,10 @@ func init() {
 						return
 					}
 				}
-				handleErrPage(w, 405, "Method "+r.Method+" is not allowed here")
+				ErrPageHandler(w, 405, "Method "+r.Method+" is not allowed here")
 				return
 			}
 		}
-		handleErrPage(w, 404, "Cannot find resource for "+r.URL.Path)
+		ErrPageHandler(w, 404, "Cannot find resource for "+r.URL.Path)
 	})
 }
