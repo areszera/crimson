@@ -13,6 +13,8 @@ server:
   port: 8080
   # Background task wait time when shutting down server (in seconds)
   timeout: 60
+  # If open browser automatically after starting server
+  auto-open: false
 session:
   # Session provider name
   provider: Crimson
