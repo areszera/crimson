@@ -46,6 +46,9 @@ func main() {
 	)
 	// Instantiate server and start
 	crimson.NewServer().Start()
+	// The Start() above will block the left code
+	// Thus, the following code will not be executed until received system interrupt signal")
+	// println("Hello, Crimson!")
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
