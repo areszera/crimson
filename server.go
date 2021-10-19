@@ -32,6 +32,9 @@ func (s *crimsonServer) Start() {
 			os.Exit(1)
 		}
 	}()
+	if IsBrowserAutoOpen() {
+		OpenInBrowser()
+	}
 	interrupt := make(chan os.Signal, 1)
 	signal.Notify(interrupt, os.Interrupt)
 	<-interrupt

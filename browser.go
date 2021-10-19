@@ -13,17 +13,18 @@ func OpenInBrowser() {
 
 // OpenUrlInBrowser opens URL in default browser
 func OpenUrlInBrowser(url string) {
-	var cmd string
+	var err error
 	switch runtime.GOOS {
 	case "windows":
-		cmd = "start"
+		err = exec.Command("cmd", "/c", "start", url).Start()
 	case "linux":
-		cmd = "open"
+		// TODO: This case has not been test in Linux
+		err = exec.Command("open", url).Start()
 	default:
+		// TODO: Add more cases of OS
 		PrintWarning("Failed to open browser, unknown OS: " + runtime.GOOS)
 		return
 	}
-	err := exec.Command(cmd, url).Start()
 	if err != nil {
 		PrintError("Failed to open browser: " + err.Error())
 	}

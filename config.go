@@ -17,8 +17,9 @@ type config struct {
 
 // config, configServer,and configSession restricts the YAML configuration file structure.
 type configServer struct {
-	Port    int   `yaml:"port"`
-	Timeout int64 `yaml:"timeout"`
+	Port     int   `yaml:"port"`
+	Timeout  int64 `yaml:"timeout"`
+	AutoOpen bool  `yaml:"auto-open"`
 }
 
 // config, configServer,and configSession restricts the YAML configuration file structure.
@@ -31,8 +32,9 @@ type configSession struct {
 // Initialize configuration with default values
 var conf = &config{
 	Server: configServer{
-		Port:    8080,
-		Timeout: 60,
+		Port:     8080,
+		Timeout:  60,
+		AutoOpen: false,
 	},
 	Session: configSession{
 		Provider: "Crimson",
@@ -64,6 +66,10 @@ func GetServerPort() int {
 // GetServerTimeout returns server shut down timeout in uint of second that configured in config.yml or default value.
 func GetServerTimeout() int64 {
 	return conf.Server.Timeout
+}
+
+func IsBrowserAutoOpen() bool {
+	return conf.Server.AutoOpen
 }
 
 // GetSessionProviderName returns session provider name that configured in config.yml or default value.
