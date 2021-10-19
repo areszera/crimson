@@ -6,9 +6,9 @@ import (
 	"strconv"
 )
 
-// OpenInBrowser opens http://127.0.0.1:port in default browser
+// OpenInBrowser opens http://127.0.0.1:<port><page> in default browser
 func OpenInBrowser() {
-	OpenUrlInBrowser("http://127.0.0.1:" + strconv.Itoa(GetServerPort()))
+	OpenUrlInBrowser("http://127.0.0.1:" + strconv.Itoa(GetServerPort()) + GetBrowserOpenPage())
 }
 
 // OpenUrlInBrowser opens URL in default browser

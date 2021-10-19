@@ -9,20 +9,23 @@ import (
 	"os"
 )
 
-// config, configServer,and configSession restricts the YAML configuration file structure.
+// config, configServer, configBrowser, and configSession restricts the YAML configuration file structure.
 type config struct {
 	Server  configServer  `yaml:"server"`
+	Browser configBrowser `yaml:"browser"`
 	Session configSession `yaml:"session"`
 }
 
-// config, configServer,and configSession restricts the YAML configuration file structure.
 type configServer struct {
-	Port     int   `yaml:"port"`
-	Timeout  int64 `yaml:"timeout"`
-	AutoOpen bool  `yaml:"auto-open"`
+	Port    int   `yaml:"port"`
+	Timeout int64 `yaml:"timeout"`
 }
 
-// config, configServer,and configSession restricts the YAML configuration file structure.
+type configBrowser struct {
+	Open bool   `yaml:"open"`
+	Page string `yaml:"page"`
+}
+
 type configSession struct {
 	Provider string `yaml:"provider"`
 	Cookie   string `yaml:"cookie"`
@@ -32,9 +35,12 @@ type configSession struct {
 // Initialize configuration with default values
 var conf = &config{
 	Server: configServer{
-		Port:     8080,
-		Timeout:  60,
-		AutoOpen: false,
+		Port:    8080,
+		Timeout: 60,
+	},
+	Browser: configBrowser{
+		Open: false,
+		Page: "/",
 	},
 	Session: configSession{
 		Provider: "Crimson",
@@ -68,8 +74,14 @@ func GetServerTimeout() int64 {
 	return conf.Server.Timeout
 }
 
+// IsBrowserAutoOpen returns if open browser automatically after starting server
 func IsBrowserAutoOpen() bool {
-	return conf.Server.AutoOpen
+	return conf.Browser.Open
+}
+
+// GetBrowserOpenPage returns open page name for browser auto open
+func GetBrowserOpenPage() string {
+	return conf.Browser.Page
 }
 
 // GetSessionProviderName returns session provider name that configured in config.yml or default value.
