@@ -8,29 +8,38 @@ import (
 	"time"
 )
 
-// PrintInfo displays green information in console.
-func PrintInfo(contents ...interface{}) {
-	fmt.Print("\033[32m[" + time.Now().Format(time.UnixDate) + "] Info:")
+const (
+	logLevelInfo    = "Info"
+	logLevelWarning = "Warning"
+	logLevelError   = "Error"
+)
+
+var logLevelColor = map[string]string{
+	logLevelInfo:    "\u001B[32m[", // green
+	logLevelWarning: "\u001B[33m[", // yellow
+	logLevelError:   "\u001B[31m[", // red
+}
+
+func printSomething(logLevel string, contents ...interface{}) {
+	fmt.Print(logLevelColor[logLevel] + time.Now().Format(time.UnixDate) + "] " + logLevel + ": ")
 	for _, content := range contents {
-		fmt.Print("", content)
+		fmt.Print(content)
+		fmt.Print(" ")
 	}
 	fmt.Println("\033[0m")
+}
+
+// PrintInfo displays green information in console.
+func PrintInfo(contents ...interface{}) {
+	printSomething(logLevelInfo, contents...)
 }
 
 // PrintWarning displays yellow warnings in console.
 func PrintWarning(contents ...interface{}) {
-	fmt.Println("\033[33m[" + time.Now().Format(time.UnixDate) + "] Warning:")
-	for _, content := range contents {
-		fmt.Print("", content)
-	}
-	fmt.Println("\033[0m")
+	printSomething(logLevelWarning, contents...)
 }
 
 // PrintError displays red error in console.
 func PrintError(contents ...interface{}) {
-	fmt.Println("\033[31m[" + time.Now().Format(time.UnixDate) + "] Error:")
-	for _, content := range contents {
-		fmt.Print("", content)
-	}
-	fmt.Println("\033[0m")
+	printSomething(logLevelError, contents...)
 }
