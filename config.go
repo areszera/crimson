@@ -6,7 +6,6 @@ package crimson
 import (
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
-	"os"
 )
 
 // config, configServer, configBrowser, and configSession restricts the YAML configuration file structure.
@@ -53,14 +52,14 @@ func init() {
 	// Always read config.yml
 	file, err := ioutil.ReadFile("config.yml")
 	if err != nil {
-		PrintError("Failed to load config file: " + err.Error())
-		os.Exit(4)
+		PrintWarning("Failed to load config file: " + err.Error())
+		return
 	}
 	// Parse YAML file and reflect to config
 	err = yaml.Unmarshal(file, conf)
 	if err != nil {
-		PrintError("Failed to unmarshal config file: " + err.Error())
-		os.Exit(4)
+		PrintWarning("Failed to unmarshal config file: " + err.Error())
+		return
 	}
 }
 
