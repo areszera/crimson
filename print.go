@@ -9,16 +9,16 @@ import (
 )
 
 // PrintInfo displays green information in console.
-func PrintInfo(content string) {
-	fmt.Println("\033[32m[" + time.Now().Format(time.UnixDate) + "] Info: " + content + "\033[0m")
+func PrintInfo(content ...interface{}) {
+	fmt.Println("\033[32m["+time.Now().Format(time.UnixDate)+"] Info:", content, "\033[0m")
 }
 
 // PrintWarning displays yellow warnings in console.
-func PrintWarning(content string) {
-	fmt.Println("\033[33m[" + time.Now().Format(time.UnixDate) + "] Warning: " + content + "\033[0m")
+func PrintWarning(content ...interface{}) {
+	fmt.Println("\033[33m["+time.Now().Format(time.UnixDate)+"] Warning:", content, "\033[0m")
 }
 
 // PrintError displays red error in console.
-func PrintError(content string) {
-	fmt.Println("\033[31m[" + time.Now().Format(time.UnixDate) + "] Error: " + content + "\033[0m")
+func PrintError(content ...interface{}) {
+	fmt.Println("\033[31m["+time.Now().Format(time.UnixDate)+"] Error:", content, "\033[0m")
 }

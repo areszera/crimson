@@ -85,7 +85,7 @@ const errPageTpl = `<!DOCTYPE html>
 
 <main>
     <p>{{ .info }}</p>
-    <p><a href="https://github.com/AreSZerA/crimson">Crimson v0.1</a></p>
+    <p><a href="https://github.com/AreSZerA/crimson" target="_blank">Crimson v` + version + `</a></p>
 </main>
 
 </body>

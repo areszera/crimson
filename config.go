@@ -8,6 +8,8 @@ import (
 	"io/ioutil"
 )
 
+const version = "0.1"
+
 // config, configServer, configBrowser, and configSession restricts the YAML configuration file structure.
 type config struct {
 	Server  configServer  `yaml:"server"`
