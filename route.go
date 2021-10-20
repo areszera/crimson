@@ -19,10 +19,10 @@ type route struct {
 var routes []route
 
 // NewRoute creates new route instance.
-// Available methods will be GET and POST if not entered.
+// Available methods will be GET if not entered.
 func NewRoute(pattern string, handler func(http.ResponseWriter, *http.Request), methods ...string) *route {
 	if len(methods) == 0 {
-		methods = []string{"GET", "POST"}
+		methods = []string{"GET"}
 	}
 	matcher, err := regexp.Compile(pattern)
 	if err != nil {

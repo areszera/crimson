@@ -40,14 +40,14 @@ import (
 )
 
 func main() {
-	// Config handler for "/" and "/index", GET and POST methods are available
+	// Config handler for "/" and "/index", GET method is available
 	crimson.AddRoute("(/)|(/index)", indexHandler)
 	// Config handlers
 	crimson.AddRoutes(
 		// Config handler for "/login", POST method only
 		*crimson.NewRoute("/login", updateHandler, "POST"),
 		// Config handler for route begins with "/user/" and end with numbers and letters  
-		*crimson.NewRoute("^/user/[0-9a-zA-Z]*$", userHandler),
+		*crimson.NewRoute("^/user/[0-9a-zA-Z]*$", userHandler, "GET", "POST"),
 	)
 	// Instantiate server and start
 	crimson.NewServer().Start()
