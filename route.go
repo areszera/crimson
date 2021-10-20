@@ -9,18 +9,6 @@ import (
 	"regexp"
 )
 
-var httpReqMethods = map[string]bool{
-	"GET":     false,
-	"POST":    false,
-	"HEAD":    false,
-	"OPTIONS": false,
-	"PUT":     false,
-	"PATCH":   false,
-	"DELETE":  false,
-	"TRACE":   false,
-	"CONNECT": false,
-}
-
 // route consists of a regular expression matcher for URL, a handler for this URL, and available methods for it.
 type route struct {
 	matcher *regexp.Regexp
@@ -33,7 +21,17 @@ var routes []route
 // NewRoute creates new route instance.
 // Available methods will be GET if not entered.
 func NewRoute(pattern string, handler func(http.ResponseWriter, *http.Request), methods ...string) *route {
-	rMethods := httpReqMethods
+	rMethods := map[string]bool{
+		"GET":     false,
+		"POST":    false,
+		"HEAD":    false,
+		"OPTIONS": false,
+		"PUT":     false,
+		"PATCH":   false,
+		"DELETE":  false,
+		"TRACE":   false,
+		"CONNECT": false,
+	}
 	if len(methods) == 0 {
 		rMethods["GET"] = true
 	} else {
@@ -76,11 +74,12 @@ func init() {
 			if rt.matcher.MatchString(r.URL.Path) {
 				if ok, exist := rt.methods[r.Method]; ok && exist {
 					rt.handler(w, r)
+					return
 				}
-				ErrPageHandler(w, 405, "Method "+r.Method+" is not allowed here")
+				ErrPageHandler(w, http.StatusMethodNotAllowed, "Method "+r.Method+" is not allowed here")
 				return
 			}
 		}
-		ErrPageHandler(w, 404, "Cannot find resource for "+r.URL.Path)
+		ErrPageHandler(w, http.StatusNotFound, "Cannot find resource for "+r.URL.Path)
 	})
 }
