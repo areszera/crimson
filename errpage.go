@@ -94,6 +94,7 @@ const errPageTpl = `<!DOCTYPE html>
 
 // ErrPageHandler sets response status code and error page.
 func ErrPageHandler(w http.ResponseWriter, status int, info interface{}) {
+	// TODO : http: superfluous response.WriteHeader call from github.com/AreSZerA/crimson.ErrPageHandler
 	w.WriteHeader(status)
 	w.Header().Set("Content-Type", "text/html")
 	sInfo, ok := statusInfo[status]
