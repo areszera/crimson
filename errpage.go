@@ -8,34 +8,6 @@ import (
 	"net/http"
 )
 
-// statusInfo maps part of HTTP status codes to their representations.
-var statusInfo = map[int]string{
-	400: "Bad Request",
-	401: "Unauthorized",
-	402: "Payment Required",
-	403: "Forbidden",
-	404: "Not Found",
-	405: "Method Not Allowed",
-	406: "Not Acceptable",
-	407: "Proxy Authentication Required",
-	408: "Request Time-out",
-	409: "Conflict",
-	410: "Gone",
-	411: "Length Required",
-	412: "Precondition Failed",
-	413: "Request Entity Too Large",
-	414: "Request-URI Too Large",
-	415: "Unsupported Media Type",
-	416: "Requested range not satisfiable",
-	417: "Expectation Failed",
-	500: "Internal Server Error",
-	501: "Not Implemented",
-	502: "Bad Gateway",
-	503: "Service Unavailable",
-	504: "Gateway Time-out",
-	505: "HTTP Version not supported",
-}
-
 // errPageTpl is the HTML template for displaying error page with status code, status code information and error information.
 const errPageTpl = `<!DOCTYPE html>
 
@@ -97,14 +69,10 @@ func ErrPageHandler(w http.ResponseWriter, status int, info interface{}) {
 	// TODO : http: superfluous response.WriteHeader call from github.com/AreSZerA/crimson.ErrPageHandler
 	w.WriteHeader(status)
 	w.Header().Set("Content-Type", "text/html")
-	sInfo, ok := statusInfo[status]
-	if !ok {
-		sInfo = "(Unknown)"
-	}
 	tpl, _ := template.New("ErrorPage").Parse(errPageTpl)
 	err := tpl.Execute(w, map[string]interface{}{
 		"status": status,
-		"sInfo":  sInfo,
+		"sInfo":  http.StatusText(status),
 		"info":   info,
 	})
 	if err != nil {
