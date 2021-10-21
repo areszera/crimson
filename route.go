@@ -18,6 +18,8 @@ type route struct {
 
 var routes []route
 
+var routeCache = make(map[string]func(http.ResponseWriter, *http.Request))
+
 // NewRoute creates new route instance.
 // Available methods will be GET if not entered.
 func NewRoute(pattern string, handler func(http.ResponseWriter, *http.Request), methods ...string) *route {
@@ -70,9 +72,14 @@ func AddStaticRoute(prefix, dir string) {
 // All the requests will firstly be directed to "/", then according r.URL.Path, do their corresponding actions.
 func init() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if handler, ok := routeCache[r.URL.Path]; ok {
+			handler(w, r)
+			return
+		}
 		for _, rt := range routes {
 			if rt.matcher.MatchString(r.URL.Path) {
 				if ok, exist := rt.methods[r.Method]; ok && exist {
+					routeCache[r.URL.Path] = rt.handler
 					rt.handler(w, r)
 					return
 				}
