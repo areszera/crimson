@@ -22,18 +22,18 @@ var routes []route
 // Available methods will be GET if not entered.
 func NewRoute(pattern string, handler func(http.ResponseWriter, *http.Request), methods ...string) *route {
 	rMethods := map[string]bool{
-		"GET":     false,
-		"POST":    false,
-		"HEAD":    false,
-		"OPTIONS": false,
-		"PUT":     false,
-		"PATCH":   false,
-		"DELETE":  false,
-		"TRACE":   false,
-		"CONNECT": false,
+		http.MethodGet:     false,
+		http.MethodPost:    false,
+		http.MethodHead:    false,
+		http.MethodOptions: false,
+		http.MethodPut:     false,
+		http.MethodPatch:   false,
+		http.MethodDelete:  false,
+		http.MethodTrace:   false,
+		http.MethodConnect: false,
 	}
 	if len(methods) == 0 {
-		rMethods["GET"] = true
+		rMethods[http.MethodGet] = true
 	} else {
 		for _, m := range methods {
 			rMethods[m] = true
