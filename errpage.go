@@ -8,8 +8,15 @@ import (
 	"net/http"
 )
 
+var defaultErrPageHandler = ErrPageHandler
+
+// SetDefaultErrPageHandler sets default error page handler.
+func SetDefaultErrPageHandler(handler func(w http.ResponseWriter, r *http.Request, status int, info interface{})) {
+	defaultErrPageHandler = handler
+}
+
 // ErrPageHandler sets response status code and error page.
-func ErrPageHandler(w http.ResponseWriter, status int, info interface{}) {
+func ErrPageHandler(w http.ResponseWriter, _ *http.Request, status int, info interface{}) {
 	w.WriteHeader(status)
 	w.Header().Set("Content-Type", "text/html")
 	tpl, _ := template.New("ErrorPage").Parse(errPageTpl)

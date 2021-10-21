@@ -83,10 +83,10 @@ func init() {
 					rt.handler(w, r)
 					return
 				}
-				ErrPageHandler(w, http.StatusMethodNotAllowed, "Method "+r.Method+" is not allowed here")
+				defaultErrPageHandler(w, r, http.StatusMethodNotAllowed, "Method "+r.Method+" is not allowed here")
 				return
 			}
 		}
-		ErrPageHandler(w, http.StatusNotFound, "Cannot find resource for "+r.URL.Path)
+		defaultErrPageHandler(w, r, http.StatusNotFound, "Cannot find resource for "+r.URL.Path)
 	})
 }
