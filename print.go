@@ -22,10 +22,7 @@ var logLevelColor = map[string]string{
 
 func printSomething(logLevel string, contents ...interface{}) {
 	fmt.Print(logLevelColor[logLevel] + time.Now().Format(time.UnixDate) + "] " + logLevel + ": ")
-	for _, content := range contents {
-		fmt.Print(content)
-		fmt.Print(" ")
-	}
+	fmt.Print(contents...)
 	fmt.Println("\033[0m")
 }
 
