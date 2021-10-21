@@ -8,22 +8,16 @@ import (
 	"time"
 )
 
-const (
-	logLevelInfo    = "Info"
-	logLevelWarning = "Warning"
-	logLevelError   = "Error"
-)
-
-var logLevelColor = map[string]string{
-	logLevelInfo:    "\u001B[32m[", // green
-	logLevelWarning: "\u001B[33m[", // yellow
-	logLevelError:   "\u001B[31m[", // red
+var logFontColor = map[string]string{
+	logLevelInfo:    fontGreen,
+	logLevelWarning: fontYellow,
+	logLevelError:   fontRed,
 }
 
 func printSomething(logLevel string, contents ...interface{}) {
-	fmt.Print(logLevelColor[logLevel] + time.Now().Format(time.UnixDate) + "] " + logLevel + ": ")
+	fmt.Print(logFontColor[logLevel] + time.Now().Format(time.UnixDate) + "] " + logLevel + ": ")
 	fmt.Print(contents...)
-	fmt.Println("\033[0m")
+	fmt.Println(fontDefault)
 }
 
 // PrintInfo displays green information in console.

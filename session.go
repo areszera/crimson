@@ -38,11 +38,11 @@ var seProviders = make(map[string]sessionProvider)
 func register(name string, provider sessionProvider) {
 	if provider == nil {
 		PrintError("Session provider is nil")
-		os.Exit(3)
+		os.Exit(exitErrRegSession)
 	}
 	if _, dup := seProviders[name]; dup {
 		PrintError("Session provider has been registered")
-		os.Exit(3)
+		os.Exit(exitErrRegSession)
 	}
 	seProviders[name] = provider
 }

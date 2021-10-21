@@ -1,3 +1,6 @@
+// Copyright 2021 AreSZerA. All rights reserved.
+// This file provides functions to start url in browser
+
 package crimson
 
 import (

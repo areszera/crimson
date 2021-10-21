@@ -44,7 +44,7 @@ func NewRoute(pattern string, handler func(http.ResponseWriter, *http.Request), 
 	matcher, err := regexp.Compile(pattern)
 	if err != nil {
 		PrintError("Failed to compile pattern " + pattern + ": " + err.Error())
-		os.Exit(2)
+		os.Exit(exitErrAddRoute)
 	}
 	return &route{
 		matcher: matcher,

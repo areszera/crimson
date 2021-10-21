@@ -29,7 +29,7 @@ func (s *crimsonServer) Start() {
 		err := server.ListenAndServe()
 		if err != nil && err != http.ErrServerClosed {
 			PrintError("Failed to start server: " + err.Error())
-			os.Exit(1)
+			os.Exit(exitErrStartServer)
 		}
 	}()
 	if IsBrowserAutoOpen() {
