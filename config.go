@@ -8,11 +8,12 @@ import (
 	"io/ioutil"
 )
 
-// config, configServer, configBrowser, and configSession restricts the YAML configuration file structure.
+// The following structures restrict the YAML configuration file structure.
 type config struct {
-	Server  configServer  `yaml:"server"`
-	Browser configBrowser `yaml:"browser"`
-	Session configSession `yaml:"session"`
+	Server  configServer   `yaml:"server"`
+	Browser configBrowser  `yaml:"browser"`
+	Session configSession  `yaml:"session"`
+	DB      configDatabase `yaml:"db"`
 }
 
 type configServer struct {
@@ -23,6 +24,18 @@ type configServer struct {
 type configBrowser struct {
 	Open bool   `yaml:"open"`
 	Page string `yaml:"page"`
+}
+
+type configDatabase struct {
+	MySQL configMySQL `yaml:"mysql"`
+}
+
+type configMySQL struct {
+	Username string `yaml:"username"`
+	Password string `yaml:"password"`
+	URL      string `yaml:"url"`
+	Name     string `yaml:"name"`
+	Extra    string `yaml:"extra"`
 }
 
 type configSession struct {
@@ -46,6 +59,7 @@ var conf = &config{
 		Cookie:   "SESSION_ID",
 		Timeout:  3600,
 	},
+	// No default value for field db
 }
 
 func init() {
@@ -81,6 +95,35 @@ func IsBrowserAutoOpen() bool {
 // GetBrowserOpenPage returns open page name for browser auto open
 func GetBrowserOpenPage() string {
 	return conf.Browser.Page
+}
+
+// GetMySQLUsername returns MySQL username
+func GetMySQLUsername() string {
+	return conf.DB.MySQL.Username
+}
+
+// GetMySQLPassword returns MySQL password
+func GetMySQLPassword() string {
+	return conf.DB.MySQL.Password
+}
+
+// GetMySQLUrl returns MySQL URL in format of ip_address:port_number
+func GetMySQLUrl() string {
+	return conf.DB.MySQL.URL
+}
+
+// GetMySQLExtra returns MySQL extra configs
+func GetMySQLExtra() string {
+	return conf.DB.MySQL.Extra
+}
+
+// GetMySQLDataSrc returns MySQL data source in format of username:password@url?extra
+func GetMySQLDataSrc() string {
+	body := GetMySQLUsername() + ":" + GetMySQLPassword() + "@" + GetMySQLUrl()
+	if GetMySQLExtra() != "" {
+		return body + "?" + GetMySQLExtra()
+	}
+	return body
 }
 
 // GetSessionProviderName returns session provider name that configured in config.yml or default value.

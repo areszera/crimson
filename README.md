@@ -4,8 +4,8 @@ Crimson is a simple web framework in Go.
 
 ## Config
 
-Crimson can read `crimson-config.yml` as config file in the root directory of your project. The available options and default
-values are:
+Crimson can read `crimson-config.yml` as config file in the root directory of your project. The available options and
+default values are:
 
 ```yaml
 server:
@@ -25,6 +25,21 @@ session:
   cookie: SESSION_ID
   # Session expires time (in seconds)
   timeout: 3600
+```
+
+To config MySQL data source, add the following lines:
+
+```yaml
+db:
+  mysql:
+    # Your MySQL username
+    username: foo
+    # Your MySQL password
+    password: bar
+    # Your MySQL URL in format of ip_address:port_number
+    url: baz
+    # Extra parameters for connecting MySQL, e.g., useSSL=false&charset=utf-8
+    extra: qux
 ```
 
 ## Usage
