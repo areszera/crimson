@@ -33,13 +33,15 @@ To config MySQL data source, add the following lines:
 db:
   mysql:
     # Your MySQL username
-    username: foo
+    username: username
     # Your MySQL password
-    password: bar
+    password: password
     # Your MySQL URL in format of ip_address:port_number
-    url: baz
+    url: url
+    # Database name
+    name: name
     # Extra parameters for connecting MySQL, e.g., useSSL=false&charset=utf-8
-    extra: qux
+    extra: extra
 ```
 
 ## Usage

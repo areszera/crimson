@@ -112,14 +112,18 @@ func GetMySQLUrl() string {
 	return conf.DB.MySQL.URL
 }
 
+func GetMySQLDBName() string {
+	return conf.DB.MySQL.Name
+}
+
 // GetMySQLExtra returns MySQL extra configs
 func GetMySQLExtra() string {
 	return conf.DB.MySQL.Extra
 }
 
-// GetMySQLDataSrc returns MySQL data source in format of username:password@url?extra
+// GetMySQLDataSrc returns MySQL data source in format of username:password@url/db?extra
 func GetMySQLDataSrc() string {
-	body := GetMySQLUsername() + ":" + GetMySQLPassword() + "@" + GetMySQLUrl()
+	body := GetMySQLUsername() + ":" + GetMySQLPassword() + "@" + GetMySQLUrl() + "/" + GetMySQLDBName()
 	if GetMySQLExtra() != "" {
 		return body + "?" + GetMySQLExtra()
 	}
