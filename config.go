@@ -50,7 +50,7 @@ var conf = &config{
 
 func init() {
 	// Always read config.yml
-	file, err := ioutil.ReadFile("config.yml")
+	file, err := ioutil.ReadFile("crimson-config.yml")
 	if err != nil {
 		PrintWarning("Failed to load config file: " + err.Error())
 		return

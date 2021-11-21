@@ -4,7 +4,7 @@ Crimson is a simple web framework in Go.
 
 ## Config
 
-Crimson can read `config.yml` as config file in the root directory of your project. The available options and default
+Crimson can read `crimson-config.yml` as config file in the root directory of your project. The available options and default
 values are:
 
 ```yaml
@@ -99,11 +99,6 @@ func logoutHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 ```
-
-## TODO list
-
-- More complete functions as a web server
-- Database helper
 
 ## Acknowledgements
 
