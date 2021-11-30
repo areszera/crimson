@@ -16,9 +16,9 @@ const (
 	logLevelError   = "Error"
 
 	// font colors in console
-	fontGreen   = "\u001B[32m["
-	fontYellow  = "\u001B[33m["
-	fontRed     = "\u001B[31m["
+	fontGreen   = "\u001B[32m"
+	fontYellow  = "\u001B[33m"
+	fontRed     = "\u001B[31m"
 	fontDefault = "\033[0m"
 
 	// Version is the current version of Crimson

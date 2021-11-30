@@ -4,8 +4,7 @@
 package crimson
 
 import (
-	"fmt"
-	"time"
+	"log"
 )
 
 var logFontColor = map[string]string{
@@ -15,9 +14,11 @@ var logFontColor = map[string]string{
 }
 
 func printSomething(logLevel string, contents ...interface{}) {
-	fmt.Print(logFontColor[logLevel] + time.Now().Format(time.UnixDate) + "] " + logLevel + ": ")
-	fmt.Print(contents...)
-	fmt.Println(fontDefault)
+	log.SetPrefix(logFontColor[logLevel])
+	log.SetFlags(log.LstdFlags)
+	contents = append([]interface{}{logLevel + ":"}, contents...)
+	contents = append(contents, fontDefault)
+	log.Println(contents...)
 }
 
 // PrintInfo displays green information in console.
