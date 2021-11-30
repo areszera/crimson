@@ -4,6 +4,9 @@
 package crimson
 
 const (
+	// Version is the current version of Crimson
+	Version = "1.0"
+
 	// exit codes
 	exitOK = iota
 	exitErrStartServer
@@ -20,9 +23,6 @@ const (
 	fontYellow  = "\u001B[33m"
 	fontRed     = "\u001B[31m"
 	fontDefault = "\033[0m"
-
-	// Version is the current version of Crimson
-	Version = "0.1"
 
 	// errPageTpl is the HTML template for displaying error page with status code, status code information and error information.
 	errPageTpl = `<!DOCTYPE html>

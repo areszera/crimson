@@ -7,6 +7,7 @@ import (
 	"log"
 )
 
+var printServerName = true
 var logFontColor = map[string]string{
 	logLevelInfo:    fontGreen,
 	logLevelWarning: fontYellow,
@@ -14,7 +15,11 @@ var logFontColor = map[string]string{
 }
 
 func printSomething(logLevel string, contents ...interface{}) {
-	log.SetPrefix(logFontColor[logLevel])
+	if printServerName {
+		log.SetPrefix(logFontColor[logLevel] + "[" + GetServerName() + "] ")
+	} else {
+		log.SetPrefix(logFontColor[logLevel])
+	}
 	log.SetFlags(log.LstdFlags)
 	contents = append([]interface{}{logLevel + ":"}, contents...)
 	contents = append(contents, fontDefault)
@@ -34,4 +39,9 @@ func PrintWarning(contents ...interface{}) {
 // PrintError displays red error in console.
 func PrintError(contents ...interface{}) {
 	printSomething(logLevelError, contents...)
+}
+
+// SetLogPrintServerName sets if print server name when print logs
+func SetLogPrintServerName(val bool) {
+	printServerName = val
 }

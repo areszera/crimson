@@ -17,8 +17,9 @@ type config struct {
 }
 
 type configServer struct {
-	Port    int   `yaml:"port"`
-	Timeout int64 `yaml:"timeout"`
+	Name    string `yaml:"name"`
+	Port    int    `yaml:"port"`
+	Timeout int64  `yaml:"timeout"`
 }
 
 type configBrowser struct {
@@ -47,6 +48,7 @@ type configSession struct {
 // Initialize configuration with default values
 var conf = &config{
 	Server: configServer{
+		Name:    "Crimson",
 		Port:    8080,
 		Timeout: 60,
 	},
@@ -63,7 +65,7 @@ var conf = &config{
 }
 
 func init() {
-	// Always read config.yml
+	// Always read crimson-config.yml
 	file, err := ioutil.ReadFile("crimson-config.yml")
 	if err != nil {
 		PrintWarning("Failed to load config file: " + err.Error())
@@ -75,6 +77,11 @@ func init() {
 		PrintWarning("Failed to unmarshal config file: " + err.Error())
 		return
 	}
+}
+
+// GetServerName returns application name that configured in config.yml or default value
+func GetServerName() string {
+	return conf.Server.Name
 }
 
 // GetServerPort returns port number that configured in config.yml or default value.
