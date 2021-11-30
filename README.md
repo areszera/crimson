@@ -1,6 +1,6 @@
 # Crimson
 
-Crimson is a simple web framework in Go.
+Crimson is a lightweight web framework in Go.
 
 ## Config
 
@@ -9,6 +9,8 @@ default values are:
 
 ```yaml
 server:
+  # Server (application) name
+  name: Crimson
   # Port number of the server
   port: 8080
   # Background task wait time when shutting down server (in seconds)
