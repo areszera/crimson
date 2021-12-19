@@ -130,7 +130,7 @@ func GetMySQLExtra() string {
 
 // GetMySQLDataSrc returns MySQL data source in format of username:password@url/db?extra
 func GetMySQLDataSrc() string {
-	body := GetMySQLUsername() + ":" + GetMySQLPassword() + "@" + GetMySQLUrl() + "/" + GetMySQLDBName()
+	body := GetMySQLUsername() + ":" + GetMySQLPassword() + "@tcp(" + GetMySQLUrl() + ")/" + GetMySQLDBName()
 	if GetMySQLExtra() != "" {
 		return body + "?" + GetMySQLExtra()
 	}

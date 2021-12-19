@@ -42,7 +42,7 @@ db:
     url: url
     # Database name
     name: name
-    # Extra parameters for connecting MySQL, e.g., useSSL=false&charset=utf-8
+    # Extra parameters for connecting MySQL, e.g., useSSL=false&charset=utf8
     extra: extra
 ```
 
