@@ -32,6 +32,7 @@ type configDatabase struct {
 }
 
 type configMySQL struct {
+	Driver   string `yaml:"driver"`
 	Username string `yaml:"username"`
 	Password string `yaml:"password"`
 	URL      string `yaml:"url"`
@@ -102,6 +103,11 @@ func IsBrowserAutoOpen() bool {
 // GetBrowserOpenPage returns open page name for browser auto open
 func GetBrowserOpenPage() string {
 	return conf.Browser.Page
+}
+
+// GetMySQLDriver returns MySQL driver name (usually mysql, mariadb is also available for mariadb)
+func GetMySQLDriver() string {
+	return conf.DB.MySQL.Username
 }
 
 // GetMySQLUsername returns MySQL username

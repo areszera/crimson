@@ -34,6 +34,8 @@ To config MySQL data source, add the following lines:
 ```yaml
 db:
   mysql:
+    # Database driver name, usually "mysql". If you are using MariaDB, "mariadb" is also available
+    driver: driver
     # Your MySQL username
     username: username
     # Your MySQL password
