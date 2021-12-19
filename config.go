@@ -107,7 +107,7 @@ func GetBrowserOpenPage() string {
 
 // GetMySQLDriver returns MySQL driver name (usually mysql, mariadb is also available for mariadb)
 func GetMySQLDriver() string {
-	return conf.DB.MySQL.Username
+	return conf.DB.MySQL.Driver
 }
 
 // GetMySQLUsername returns MySQL username
