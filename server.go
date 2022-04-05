@@ -43,7 +43,7 @@ func (s *crimsonServer) Start() {
 	defer cancel()
 	err := server.Shutdown(ctx)
 	if err != nil {
-		PrintInfo("There are unfinished works, will shut down in " + strconv.Itoa(int(GetServerTimeout())) + " seconds")
+		PrintInfo("\rThere are unfinished works, will shut down in " + strconv.Itoa(int(GetServerTimeout())) + " seconds")
 	}
-	PrintInfo("Server shut down successfully")
+	PrintInfo("\rServer shut down successfully")
 }

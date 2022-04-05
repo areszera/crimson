@@ -14,9 +14,9 @@ const (
 	exitErrRegSession
 
 	// log levels
-	logLevelInfo    = "Info"
-	logLevelWarning = "Warning"
-	logLevelError   = "Error"
+	logLevelInfo    = "INFO"
+	logLevelWarning = "WARN"
+	logLevelError   = "ERRO"
 
 	// font colors in console
 	fontGreen   = "\u001B[32m"
