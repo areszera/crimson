@@ -4,8 +4,8 @@ Crimson is a lightweight web framework in Go.
 
 ## Config
 
-Crimson can read `crimson-config.yml` as config file in the root directory of your project. The available options and
-default values are:
+Crimson can read YAML files as config file using the `LoadConfig` function. The available options and default values
+are:
 
 ```yaml
 server:
@@ -61,6 +61,8 @@ import (
 )
 
 func main() {
+	// Load config file
+	crimson.LoadConfig("config.yaml")
 	// Config handler for "/" and "/index", GET method is available
 	crimson.AddRoute("(/)|(/index)", indexHandler)
 	// Config handlers

@@ -65,9 +65,11 @@ var conf = &config{
 	// No default value for field db
 }
 
-func init() {
-	// Always read crimson-config.yml
-	file, err := ioutil.ReadFile("crimson-config.yml")
+// LoadConfig reads file to load config.
+// If failed to load, use the default values.
+func LoadConfig(filename string) {
+	// Read config file
+	file, err := ioutil.ReadFile(filename)
 	if err != nil {
 		PrintWarning("Failed to load config file: " + err.Error())
 		return
