@@ -1,4 +1,4 @@
-module github.com/AreSZerA/crimson
+module github.com/areszera/crimson
 
 go 1.17
 
