@@ -56,7 +56,7 @@ An example of starting server:
 package main
 
 import (
-	"github.com/AreSZerA/crimson"
+	"github.com/areszera/crimson"
 	"net/http"
 )
 
@@ -98,7 +98,7 @@ An example of using session:
 package view
 
 import (
-	"github.com/AreSZerA/crimson"
+	"github.com/areszera/crimson"
 	"net/http"
 )
 
@@ -122,8 +122,3 @@ func logoutHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 ```
-
-## Acknowledgements
-
-- [Jetbrains GoLand](https://www.jetbrains.com/go/)
-- [astaxie/build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang)
